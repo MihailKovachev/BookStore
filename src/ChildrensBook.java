@@ -30,7 +30,7 @@ public class ChildrensBook extends Book {
     {
         if (!printInfo) { return getPrice(); }
 
-        System.out.println("The comic book " + name + " authored by " + author.getName() +
+        System.out.println("The comic book " + title + " authored by " + author.getName() +
                 " has a price of " + getPrice() + " lev.");
 
         return getPrice();

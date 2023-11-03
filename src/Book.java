@@ -1,30 +1,36 @@
+import java.util.Objects;
+
 public class Book {
 
-    protected String name;
+    protected String title;
     protected Author author;
     protected float price;
+
+    protected int hashCode;
     public static final BookType TYPE = BookType.BOOK;
 
     public Book()
     {
-        name = "";
+        title = "";
         author = new Author();
         price = 0.0f;
+
+        hashCode = Objects.hash(title, author.getName());
     }
 
     public Book(String name, Author author, float price)
     {
-        this.name = name;
+        this.title = name;
         this.author = author;
         this.price = price;
     }
 
     public String getName() {
-        return name;
+        return title;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.title = name;
     }
 
     public float getPrice() {
@@ -41,6 +47,21 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Book that = (Book) o;
+        return title.equals(that.title) && author.getName().equals(that.getAuthor().getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.hashCode;
     }
 }
 
