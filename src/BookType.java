@@ -1,5 +1,5 @@
 public enum BookType {
     BOOK,
-    CHILDREN_BOOK,
+    CHILDRENS_BOOK,
     COMIC_BOOK
 }

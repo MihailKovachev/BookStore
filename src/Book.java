@@ -1,9 +1,9 @@
 public class Book {
 
-    private String name;
-    private Author author;
-    private float price;
-    private final BookType type = BookType.BOOK;
+    protected String name;
+    protected Author author;
+    protected float price;
+    public static final BookType TYPE = BookType.BOOK;
 
     public Book()
     {
@@ -33,10 +33,6 @@ public class Book {
 
     public void setPrice(float price) {
         this.price = price;
-    }
-
-    public BookType getType() {
-        return type;
     }
 
     public Author getAuthor() {
