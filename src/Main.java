@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -6,14 +7,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         BookStore store = new BookStore();
-        Book exampleBook = new Book("Example Book", new Author("Example Author", 24), 23.99f);
-        store.Add(exampleBook, 1);
 
-        ComicBook exampleComicBook = new ComicBook("Example Comic Book", new Author("Example Author", 24), 23.99f, "Example Character");
-        store.Add(exampleComicBook, 1);
-
-        ChildrensBook exampleChildrensBook = new ChildrensBook("Example Children Book", new Author("Example Author", 24), 23.99f, 11);
-        store.Add(exampleChildrensBook, 1);
+        List<Book> books = store.getBooks();
 
         while (true)
         {
@@ -53,20 +48,23 @@ public class Main {
 
             if (bookType.equalsIgnoreCase("BOOK"))
             {
-                store.Add(new Book(title, new Author(authorName, authorAge), bookPrice), numberOfCopies);
+                books.add(new Book(title, new Author(authorName, authorAge), bookPrice));
+                store.getBooks().get(books.size() - 1).setAvailable(numberOfCopies);
             }
             else if (bookType.equalsIgnoreCase("CHILDRENS_BOOK")) {
                 System.out.println("Enter the age the book is oriented towards: ");
                 int bookAge = Integer.parseInt(sc.nextLine());
 
-                store.Add(new ChildrensBook(title, new Author(authorName, authorAge), bookPrice, bookAge), numberOfCopies);
+                books.add(new ChildrensBook(title, new Author(authorName, authorAge), bookPrice, bookAge));
+                store.getBooks().get(books.size() - 1).setAvailable(numberOfCopies);
             }
             else if (bookType.equalsIgnoreCase("COMIC_BOOK"))
             {
                 System.out.println("Enter the main character's name: ");
                 String characterName = sc.nextLine();
 
-                store.Add(new ComicBook(title, new Author(authorName, authorAge), bookPrice, characterName), numberOfCopies);
+                books.add(new ComicBook(title, new Author(authorName, authorAge), bookPrice, characterName));
+                store.getBooks().get(books.size() - 1).setAvailable(numberOfCopies);
             }
             else {
                 System.out.println("Not a valid book type.");
@@ -77,14 +75,11 @@ public class Main {
 
         }
 
-        store.Sell(exampleBook);
-        store.Sell(exampleBook);
-
-        store.Sell(exampleChildrensBook);
-        store.Sell(exampleChildrensBook);
-
-        store.Sell(exampleComicBook);
-        store.Sell(exampleComicBook);
+        for (int i = 0; i < books.size(); ++i)
+        {
+            if (i % 2 == 0)
+                store.sell(books.get(i));
+        }
 
         // C# > Java
     }

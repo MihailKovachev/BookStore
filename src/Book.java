@@ -6,6 +6,8 @@ public class Book {
     protected Author author;
     protected float price;
 
+    protected int available;
+
     protected int hashCode;
     public static final BookType TYPE = BookType.BOOK;
 
@@ -25,11 +27,11 @@ public class Book {
         this.price = price;
     }
 
-    public String getName() {
+    public String getTitle() {
         return title;
     }
 
-    public void setName(String name) {
+    public void setTitle(String name) {
         this.title = name;
     }
 
@@ -49,19 +51,13 @@ public class Book {
         this.author = author;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Book that = (Book) o;
-        return title.equals(that.title) && author.getName().equals(that.getAuthor().getName());
+    public int getAvailable() {
+        return available;
     }
 
-    @Override
-    public int hashCode() {
-        return this.hashCode;
+    public void setAvailable(int available) {
+        this.available = available;
     }
+
 }
 

@@ -1,44 +1,38 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
 
 public class BookStore {
 
-    // HashMap вместо ArrayList, защото е много по-добро в този случай
-    private HashMap<Book, Integer> books;
+    private List<Book> books;
 
     public BookStore()
     {
-        books = new HashMap<>();
+        books = new ArrayList<>();
     }
 
-    public void Add(Book book, int numberOfCopies)
+    public void sell(Book book)
     {
-        if(!books.containsKey(book))
+        int available = book.getAvailable();
+        if (available > 0)
         {
-            books.put(book, numberOfCopies);
-            return;
-        }
-
-        books.put(book, books.get(book) + numberOfCopies);
-    }
-
-    public void Sell(Book book)
-    {
-        if(!books.containsKey(book))
-        {
-            throw new RuntimeException("No such book.");
-        }
-
-        if (books.get(book) > 0)
-        {
-            books.put(book, books.get(book) - 1);
-            System.out.println("The book '" + book.getName() + "' authored by "
+            book.setAvailable(available - 1);
+            System.out.println("The book '" + book.getTitle() + "' authored by "
                     + book.getAuthor().getName() + " was just sold at " + book.getPrice() + " lev.");
         }
         else
         {
-            System.out.println("There are no available copies of the book '" + book.getName() + "' authored by "
+            System.out.println("There are no available copies of the book '" + book.getTitle() + "' authored by "
                     + book.getAuthor().getName() + ".");
         }
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }
